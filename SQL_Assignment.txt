@@ -1,0 +1,47 @@
+ -- 2
+ --2.1 
+SELECT * from users;
+SELECT * from progress;
+
+ --2.2 
+SELECT email_domain, count(*) as top 
+FROM users WHERE email_domain 
+like '%.edu' group by email_domain 
+ORDER by top DESC LIMIT 25;
+
+ --2.3
+SELECT count(*) FROM users WHERE city = 'New York';
+ --2.4
+SELECT count(*) FROM users WHERE mobile_app = 'mobile-user';
+
+
+ -- 3 
+SELECT 
+	strftime('%H', sign_up_at) AS hr,
+	COUNT(*) AS sign_up_count
+FROM users
+GROUP BY hr
+ORDER BY hr;
+
+ --4
+SELECT * FROM users JOIN 
+progress on users.user_id = progress.user_id
+
+ --4.1
+select email_domain, learn_cpp, learn_sql, learn_java ,learn_html ,learn_javascript
+from users join progress on users.user_id = progress.user_id
+where email_domain like '%.edu'
+group by email_domain;
+
+
+ --4.2 
+select city ,learn_cpp, learn_sql, learn_java ,learn_html ,learn_javascript
+from users join progress on users.user_id = progress.user_id
+where city like 'New York%'
+group by city;
+
+ --4.3
+select city, learn_cpp, learn_sql, learn_java ,learn_html ,learn_javascript
+from users join progress on users.user_id = progress.user_id
+where city like 'Chicago%'
+group by city;
